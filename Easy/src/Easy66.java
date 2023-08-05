@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 class Easy66 {
     public int[] plusOne(int[] digits) {
         int n = digits.length;
