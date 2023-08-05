@@ -1,7 +1,12 @@
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 class Medium18 {
     public List<List<Integer>> fourSum(int[] nums, int target) {
         Set<List<Integer>> subarrays = new HashSet<List<Integer>>();
-        findCombinations(nums,target,0,4,subarrays,new ArrayList<Integer>());
+        findCombinations(nums, target, 0, 4, subarrays, new ArrayList<Integer>());
         List<List<Integer>> result = new ArrayList<List<Integer>>(subarrays);
         return result;
 
