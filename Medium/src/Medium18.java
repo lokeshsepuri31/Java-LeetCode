@@ -32,4 +32,9 @@ class Medium18 {
             out.remove(out.size() - 1);
         }
     }
+
+    public static void main(String[] args) {
+        Medium18 medium18 = new Medium18();
+        System.out.println(medium18.fourSum(new int[] {2,3,4,5,8,7},5));
+    }
 }
