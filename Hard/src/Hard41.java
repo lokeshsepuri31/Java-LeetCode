@@ -12,7 +12,7 @@ public class Hard41 {
                 if (nums[i] == sequence)
                     sequence++;
                 else if (nums[i] < sequence) {
-
+                    continue;
                 } else
                     return sequence;
             }
