@@ -4,17 +4,15 @@ import java.util.List;
 public class Easy119 {
 
     public List<Integer> getRow(int rowIndex) {
-
         List<Integer> row = new ArrayList<>();
-
         int ans = 1;
+        rowIndex +=1;
         row.add(ans);
-        for (int i = 1; i <= rowIndex; i++) {
+        for (int i = 1; i < rowIndex; i++) {
             ans *= (rowIndex - i);
             ans /= i;
             row.add(ans);
         }
-
         return row;
     }
 
