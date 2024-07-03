@@ -1,51 +1,58 @@
+import java.util.ArrayList;
+
 public class Medium5 {
-    private boolean isPalindrome(String palindrome, int start, int end) {
-
-        while (start < end) {
-            if (palindrome.charAt(start) != palindrome.charAt(end)) {
-                return false;
-            }
-            start++;
-            end--;
-        }
-
-        return true;
-    }
-
-    private int searchChar(String s, char ch, int end) {
-
-        if (s.length() == 1) {
-            return 0;
-        }
-
-        for (int i = 0; i < end; i++) {
-            if (s.charAt(i) == ch) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
     public String longestPalindrome(String s) {
-
-        if (s == "" || s == null) {
-            return s;
+        // Step 1: Preprocess the input string
+        StringBuilder processedStr = new StringBuilder("^#");
+        for (char c : s.toCharArray()) {
+            processedStr.append(c).append("#");
         }
+        processedStr.append("$");
+        String modifiedString = processedStr.toString();
 
-        for (int i = s.length() - 1; i >= 0; i--) {
-            int index = searchChar(s, s.charAt(i), i);
-            if (index != -1) {
-                if (isPalindrome(s, index, i)) {
-                    return s.substring(index, i + 1);
-                }
+        // Step 2: Initialize variables for the algorithm
+        int strLength = modifiedString.length();
+        int[] palindromeLengths = new int[strLength];
+        int center = 0;  // Current center of the palindrome
+        int rightEdge = 0;  // Rightmost edge of the palindrome
+
+        // Step 3: Loop through the modified string to find palindromes
+        for (int i = 1; i < strLength - 1; i++) {
+            palindromeLengths[i] = (rightEdge > i) ? Math.min(rightEdge - i, palindromeLengths[2 * center - i]) : 0;
+
+            // Expand the palindrome around the current character
+            while (modifiedString.charAt(i + 1 + palindromeLengths[i]) == modifiedString.charAt(i - 1 - palindromeLengths[i])) {
+                palindromeLengths[i]++;
+            }
+
+            // Update the rightmost edge and center if necessary
+            if (i + palindromeLengths[i] > rightEdge) {
+                center = i;
+                rightEdge = i + palindromeLengths[i];
             }
         }
-        return String.valueOf(s.charAt(0));
+
+        // Step 4: Find the longest palindrome and its center
+        int maxLength = 0;
+        int maxCenter = 0;
+        for (int i = 0; i < strLength; i++) {
+            if (palindromeLengths[i] > maxLength) {
+                maxLength = palindromeLengths[i];
+                maxCenter = i;
+            }
+        }
+
+        // Step 5: Extract the longest palindrome from the modified string
+        int start = (maxCenter - maxLength) / 2;
+        int end = start + maxLength;
+
+        // Return the longest palindrome in the original string
+        return s.substring(start, end);
     }
 
     public static void main(String[] args) {
         Medium5 medium5 = new Medium5();
-        String s = "c";
+        String s = "cbbd";
         System.out.println(medium5.longestPalindrome(s));
     }
 }
