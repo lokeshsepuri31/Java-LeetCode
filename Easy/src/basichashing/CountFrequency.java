@@ -22,7 +22,7 @@ public class CountFrequency {
         int highestKey = 0;
         int highestValue = 0;
         int lowestKey = 100;
-        int lowestValue = 100;
+        int lowestValue = 10;
 
         for (Map.Entry<Integer, Integer> map : getFrequency(arr).entrySet()) {
             int value = map.getValue();
