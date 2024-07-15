@@ -1,0 +1,13 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+aws.xml
+Easy.iml
+LeetCode-WorkSpace.iml
+modules.xml
+Hard.iml
+misc.xml
+vcs.xml
+Medium.iml
+
+/*/*.class
